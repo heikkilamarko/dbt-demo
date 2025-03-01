@@ -4,9 +4,10 @@ CREATE DATABASE demo_db;
 
 CREATE SCHEMA demo;
 
-CREATE TABLE demo.raw_data (
+CREATE TABLE demo.raw_employees (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name TEXT NOT NULL,
+    full_name TEXT NOT NULL,
+    age INT NOT NULL,
     description TEXT NOT NULL,
     created_at TIMESTAMPTZ NOT NULL
 );

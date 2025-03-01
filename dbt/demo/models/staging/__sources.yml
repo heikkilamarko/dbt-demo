@@ -4,4 +4,4 @@ sources:
   - name: demo
     schema: demo
     tables:
-      - name: raw_data
+      - name: raw_employees
