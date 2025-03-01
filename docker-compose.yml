@@ -16,7 +16,7 @@ services:
 
   dbt-demo-seed:
     build: ./dbt/demo
-    image: dbt-demo/demo-seed
+    image: dbt-demo/demo
     platform: linux/amd64
     command: ["seed"]
     deploy:
@@ -30,7 +30,6 @@ services:
       - postgres
 
   dbt-demo:
-    build: ./dbt/demo
     image: dbt-demo/demo
     platform: linux/amd64
     command: ["run"]
@@ -45,8 +44,7 @@ services:
       - dbt-demo-seed
 
   dbt-demo-test:
-    build: ./dbt/demo
-    image: dbt-demo/demo-test
+    image: dbt-demo/demo
     platform: linux/amd64
     command: ["test"]
     env_file:
@@ -55,6 +53,19 @@ services:
       - dbt-demo
     depends_on:
       - dbt-demo
+
+  dbt-demo-docs:
+    image: dbt-demo/demo
+    platform: linux/amd64
+    entrypoint: ["/entrypoint_docs.sh"]
+    env_file:
+      - ./env/dbt.env
+    ports:
+      - "8080:8080"
+    networks:
+      - dbt-demo
+    depends_on:
+      - postgres
 
 networks:
   dbt-demo:
