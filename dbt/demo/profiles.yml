@@ -3,10 +3,11 @@ demo:
     dev:
       dbname: demo_db
       host: postgres
-      pass: S3c_r3t!
+      user: "{{ env_var('DBT_USER') }}"
+      pass: "{{ env_var('DBT_PASS') }}"
       port: 5432
       schema: demo
       threads: 1
       type: postgres
-      user: admin
+
   target: dev

@@ -14,6 +14,21 @@ services:
     networks:
       - dbt-demo
 
+  dbt-demo-seed:
+    build: ./dbt/demo
+    image: dbt-demo/demo-seed
+    platform: linux/amd64
+    command: ["seed"]
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/dbt.env
+    networks:
+      - dbt-demo
+    depends_on:
+      - postgres
+
   dbt-demo:
     build: ./dbt/demo
     image: dbt-demo/demo
@@ -22,10 +37,13 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+    env_file:
+      - ./env/dbt.env
     networks:
       - dbt-demo
     depends_on:
       - postgres
+      - dbt-demo-seed
 
 networks:
   dbt-demo:
