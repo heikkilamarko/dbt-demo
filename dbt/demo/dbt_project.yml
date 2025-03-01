@@ -21,3 +21,6 @@ models:
       +materialized: view
     marts:
       +materialized: table
+
+tests:
+  +store_failures: true

@@ -1,0 +1,6 @@
+version: 2
+
+data_tests:
+  - name: assert_employee_age
+    description: >
+      Ensure that the age of all employees is between 18 and 100.

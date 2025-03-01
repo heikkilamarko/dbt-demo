@@ -42,8 +42,19 @@ services:
     networks:
       - dbt-demo
     depends_on:
-      - postgres
       - dbt-demo-seed
+
+  dbt-demo-test:
+    build: ./dbt/demo
+    image: dbt-demo/demo-test
+    platform: linux/amd64
+    command: ["test"]
+    env_file:
+      - ./env/dbt.env
+    networks:
+      - dbt-demo
+    depends_on:
+      - dbt-demo
 
 networks:
   dbt-demo:
