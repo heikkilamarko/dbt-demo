@@ -28,6 +28,8 @@ services:
       - dbt-demo
     depends_on:
       - postgres
+    profiles:
+      - dbt
 
   dbt-demo:
     image: dbt-demo/demo
@@ -41,7 +43,9 @@ services:
     networks:
       - dbt-demo
     depends_on:
-      - dbt-demo-seed
+      - postgres
+    profiles:
+      - dbt
 
   dbt-demo-test:
     image: dbt-demo/demo
@@ -52,7 +56,9 @@ services:
     networks:
       - dbt-demo
     depends_on:
-      - dbt-demo
+      - postgres
+    profiles:
+      - dbt
 
   dbt-demo-docs:
     image: dbt-demo/demo
@@ -66,6 +72,8 @@ services:
       - dbt-demo
     depends_on:
       - postgres
+    profiles:
+      - dbt
 
 networks:
   dbt-demo:
